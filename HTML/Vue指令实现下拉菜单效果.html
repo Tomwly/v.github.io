@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue指令实现下拉菜单效果</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.47/vue.global.js"></script>
+    <style>
+      /* 209001011 文连宇 */
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      li {
+        list-style: none;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      .menu {
+        display: flex;
+        width: 1024px;
+        margin: 0 auto;
+        background-color: #e90d1a;
+      }
+
+      .menu li:first-child a span {
+        display: block;
+        text-align: center;
+      }
+
+      .firstOrder {
+        background: url(https://www.hongyan.info/Public/style/lihong/images/public/nav-line.png)
+          no-repeat right top;
+        height: 70px;
+        text-align: center;
+        width: 113px;
+        display: block;
+        color: #fff;
+        font-size: 20px;
+        padding: 30px 0 0 0;
+        font-weight: bold;
+      }
+
+      .firstOrder:hover {
+        background-image: url(https://www.hongyan.info/Public/style/lihong/images/public/nav.png);
+      }
+
+      .firstOrder a {
+        color: white;
+      }
+
+      .englishName {
+        display: block;
+        color: white;
+        font-size: 12px;
+        height: 35px;
+      }
+
+      .SecondLevel {
+        background-color: #e90d1a;
+      }
+
+      .SecondLevel li a {
+        font-size: 14px;
+      }
+
+      .SecondLevel li:hover {
+        background-color: #d90616;
+      }
+    </style>
+  </head>
+  
+  <body>
+    <div id="app" v-cloak>
+      <div class="container">
+        <ul class="menu">
+          <li
+            v-for="(item,index) in menus"
+            :key="item.name"
+            @mouseover="show(item)"
+            @mouseout="unshow(item)"
+            class="firstOrder"
+          >
+            <a :href="item.url"
+              >{{item.name}}
+              <span class="englishName">{{item.englishName}}</span>
+            </a>
+            <ul v-show="item.show" class="SecondLevel">
+              <li v-for="(subitem,index) in item.subMenus" :key="subitem.name">
+                <a :href="subitem.url">{{subitem.name}}</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <script>
+      const data = {
+        menus: [
+          { name: "首页", url: "#", englishName: "Home" },
+          {
+            name: "关于红岩",
+            url: "#",
+            show: false,
+            englishName: "HongYan",
+            subMenus: [
+              { name: "红岩文化", url: "#" },
+              { name: "博物馆机构", url: "#" },
+              { name: "历史沿革", url: "#" },
+            ],
+          },
+          {
+            name: "公告动态",
+            url: "#",
+            show: false,
+            englishName: "Dynamics",
+            subMenus: [
+              { name: "文博信息", url: "#" },
+              { name: "政务平台", url: "#" },
+              { name: "公告", url: "#" },
+              { name: "专题报告", url: "#" },
+            ],
+          },
+          {
+            name: "馆藏精品",
+            url: "#",
+            show: false,
+            englishName: "Collections",
+            subMenus: [
+              { name: "一级文物", url: "#" },
+              { name: "二级文物", url: "#" },
+              { name: "三级文物", url: "#" },
+            ],
+          },
+          {
+            name: "陈列展览",
+            url: "#",
+            show: false,
+            englishName: "Exhibition",
+            subMenus: [
+              { name: "虚拟展览", url: "#" },
+              { name: "基本陈列", url: "#" },
+              { name: "复原陈列", url: "#" },
+              { name: "临时展览", url: "#" },
+              { name: "展览交流", url: "#" },
+            ],
+          },
+          {
+            name: "研究开发",
+            url: "#",
+            show: false,
+            englishName: "Resarch",
+            subMenus: [
+              { name: "历史研究", url: "#" },
+              { name: "艺术创作", url: "#" },
+              { name: "影音在线", url: "#" },
+              { name: "文创产品", url: "#" },
+            ],
+          },
+          {
+            name: "公共教育",
+            url: "#",
+            show: false,
+            englishName: "Education",
+            subMenus: [
+              { name: "党性教育", url: "#" },
+              { name: "爱国主义教育", url: "#" },
+              { name: "研学实践教育", url: "#" },
+              { name: "科普教育", url: "#" },
+            ],
+          },
+          {
+            name: "参观服务品",
+            url: "#",
+            show: false,
+            englishName: "Service",
+            subMenus: [
+              { name: "景点介绍", url: "#" },
+              { name: "服务内容", url: "#" },
+              { name: "网上预约", url: "#" },
+              { name: "志愿服务", url: "#" },
+            ],
+          },
+          {
+            name: "网上预约",
+            url: "#",
+            englishName: "Reservation",
+          },
+        ],
+      };
+
+      const vm = Vue.createApp({
+        data() {
+          return data;
+        },
+        methods: {
+          show(item) {
+            console.log("展示");
+            item.show = !item.show;
+          },
+          unshow(item) {
+            console.log("不展示");
+            item.show = !item.show;
+          },
+        },
+      }).mount("#app");
+    </script>
+    <a href="../index/index.html">返回到主页面</a>
+  </body>
+</html>

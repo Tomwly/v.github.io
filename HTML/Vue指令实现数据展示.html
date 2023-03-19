@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue指令实现数据展示</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+      /* 209001011 文连宇 */
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      #app {
+        width: 1226px;
+        margin: 0 auto;
+      }
+
+      a {
+        text-decoration: none;
+        display: inline-block;
+        padding: 20px 0;
+      }
+
+      ul {
+        display: flex;
+        background-color: #f5f5f5;
+        flex-wrap: wrap;
+      }
+
+      li {
+        margin-left: 14px;
+        margin-bottom: 14px;
+        display: block;
+        width: 234px;
+        list-style: none;
+        background-color: #ffffff;
+        height: 300px;
+        padding: 0;
+      }
+
+      .img {
+        width: 160px;
+        height: 160px;
+        margin: 0 auto;
+      }
+
+      .phone {
+        width: 160px;
+        height: 160px;
+      }
+
+      .title {
+        font-size: 14px;
+        margin: 0 10px 2px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        text-align: center;
+        overflow: hidden;
+      }
+
+      .desc {
+        width: 214px;
+        font-size: 12px;
+        height: 18px;
+        margin: 0 10px 10px;
+        color: #b0b0b0;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        text-align: center;
+        overflow: hidden;
+      }
+
+      .price {
+        color: #ff6700;
+        text-align: center;
+        margin: 0 10px 14px;
+      }
+
+      .num {
+        text-align: center;
+        color: #ff6700;
+      }
+
+      .container {
+        display: flex;
+        height: 628px;
+      }
+
+      .banner {
+        margin: 0 0 -14px -14px;
+        height: 614px;
+      }
+
+      .banerImg {
+        width: 234px;
+      }
+
+      a:hover {
+        transition: all 0.5s;
+        transform: translate3d(0, -3px, 0);
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="container">
+        <div class="left">
+          <ul class="banner">
+            <li>
+              <a href="">
+                <img src="../images/ad1.png" alt="" class="banerImg" />
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="right">
+          <ul>
+            <li v-for="(item,index) in Phonelist">
+              <a href="">
+                <div class="img">
+                  <img :src="item.url" alt="" class="phone" />
+                </div>
+                <h3 class="title">{{item.title}}</h3>
+                <p class="desc">{{item.desc}}</p>
+                <p class="price">
+                  <span class="num">{{item.num}}</span>
+                  <span>元</span>
+                  <span>起</span>
+                </p>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            Phonelist: [
+              {
+                url: "../images/phone1.png",
+                title: "Redmi 12c",
+                desc: "高性能长续航，5000万像素超清双摄",
+                num: "699",
+              },
+              {
+                url: "../images/phone2.png",
+                title: "Redmi K60",
+                desc: "骁龙8+｜2K 高光直屏｜5500mAh+67W闪充",
+                num: "2499",
+              },
+              {
+                url: "../images/phone3.png",
+                title: "Redmi K60 Pro",
+                desc: "【第二代骁龙8】狂暴引擎",
+                num: "3299",
+              },
+              {
+                url: "../images/phone4.png",
+                title: "Redmi Note 12 Pro 极速版",
+                desc: "高通骁龙778G，OLED柔性直屏+一亿像素",
+                num: "1699",
+              },
+              {
+                url: "../images/phone5.png",
+                title: "Xiaomi 13 限量定制色",
+                desc: "      全新第二代骁龙8｜徕卡专业光学镜头｜徕卡原生双画质 | 6.36″超窄边屏幕｜67W小米澎湃秒充｜徕卡75mm长焦镜头",
+                num: "4999",
+              },
+              {
+                url: "../images/phone6.png",
+                title: "Xiaomi 13 Pro",
+                desc: "全新第二代骁龙8｜徕卡专业光学镜头｜徕卡原生双画质 | 2K 专业原色屏｜120W小米澎湃秒充 ｜徕卡75mm长焦镜头",
+                num: "4999",
+              },
+              {
+                url: "../images/phone7.png",
+                title: "Xiaomi 13",
+                desc: "全新第二代骁龙8｜徕卡专业光学镜头｜徕卡原生双画质 | 6.36″超窄边屏幕｜67W小米澎湃秒充｜徕卡75mm长焦镜头",
+                num: "3999",
+              },
+              {
+                url: "../images/phone8.png",
+                title: "Redmi Note 12 5G",
+                desc: "三星 OLED 护眼屏｜骁龙 5G 芯｜5000mAh 电量",
+                num: "1199",
+              },
+            ],
+          };
+        },
+      });
+      app.mount("#app");
+    </script>
+    <a href="../index/index.html">返回到主页面</a>
+  </body>
+</html>
